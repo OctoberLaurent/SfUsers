@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        {% block stylesheets %}{% endblock %}
+    </head>
+    <body>
+        <nav> 
+        <a href="{{ path('homepage') }}">Accueil</a>
+        <a href="{{ path('public') }}">Page publique</a>
+        <a href="{{ path('private') }}">Page privée</a>
+         </nav>
+        {% block body %}{% endblock %}
+        {% block javascripts %}{% endblock %}
+    </body>
+</html>
