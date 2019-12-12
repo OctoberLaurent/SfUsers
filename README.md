@@ -17,8 +17,8 @@ composer require profiler
 composer require doctrine/doctrine-fixtures-bundle --dev 
 
 **En une seule ligne**
-composer require symfony/flex symfony/web-server-bundle --dev symfony/maker-bundle --dev symfony/orm-pack symfony/security 
-annotations form validator twig-bundle security-csrf symfony/swiftmailer-bundle profiler doctrine/doctrine-fixtures-bundle --dev 
+composer require symfony/flex symfony/orm-pack symfony/security 
+annotations form validator twig-bundle security-csrf symfony/swiftmailer-bundle profiler doctrine/doctrine-fixtures-bundle --dev symfony/web-server-bundle --dev symfony/maker-bundle --dev 
 
 Démarer le serveur 
 php bin/console serveur:run *:8000
@@ -76,4 +76,44 @@ class DefaultController extends AbstractController
         ]);
     }
 }
+```
+dans base.html.twig
+
+```php
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        {% block stylesheets %}{% endblock %}
+    </head>
+    <body>
+        <nav> 
+        <a href="{{ path('homepage') }}">Accueil</a>
+        <a href="{{ path('public') }}">Page publique</a>
+        <a href="{{ path('private') }}">Page privée</a>
+         </nav>
+        {% block body %}{% endblock %}
+        {% block javascripts %}{% endblock %}
+    </body>
+</html>
+```
+dans index.html.twig 
+
+```php
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello DefaultController!{% endblock %}
+
+{% block body %}
+<h1>HomePage</h1>
+{% endblock %}
+
+```
+
+## Création de l'entity User
+
+```bash
+php bin/console make:user
+
 ```

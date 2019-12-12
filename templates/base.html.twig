@@ -7,9 +7,18 @@
     </head>
     <body>
         <nav> 
-        <a href="{{ path('homepage') }}">Accueil</a>
-        <a href="{{ path('public') }}">Page publique</a>
-        <a href="{{ path('private') }}">Page privée</a>
+            <a href="{{ path('homepage') }}">Accueil</a>
+            <a href="{{ path('public') }}">Page publique</a>
+            <a href="{{ path('private') }}">Page privée</a>
+        </nav>
+
+        <nav>
+            {# AUTHENTICATED USER #}
+            <a href="#">Username</a>
+            <a href="#">Deconnexion</a>
+            {# ANONYMOUS USER #}
+            <a href="#">Inscription</a>
+            <a href="#">Connexion</a>
          </nav>
         {% block body %}{% endblock %}
         {% block javascripts %}{% endblock %}
