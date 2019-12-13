@@ -3,24 +3,54 @@
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
+        {% block stylesheets %}
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        {% endblock %}
     </head>
-    <body>
-        <nav> 
-            <a href="{{ path('homepage') }}">Accueil</a>
-            <a href="{{ path('public') }}">Page publique</a>
-            <a href="{{ path('private') }}">Page privée</a>
-        </nav>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="#">Navbar</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav">
+        <li class="nav-item active">
+          <a class="nav-link" href="{{ path('homepage') }}">Accueil</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ path('public') }}">Page publique</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ path('private') }}">Page privée</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
 
-        <nav>
-            {# AUTHENTICATED USER #}
-            <a href="#">Username</a>
-            <a href="#">Deconnexion</a>
-            {# ANONYMOUS USER #}
-            <a href="#">Inscription</a>
-            <a href="#">Connexion</a>
-         </nav>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
-    </body>
+  <nav>              
+    {#authenticated user #}             
+    {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}             
+    {# Authenticated user #}             
+      <a href="{{ path('account') }}">{{ app.user.fullname }}</a>             
+      <a href="{{ path('logout') }}">Deconnexion</a>             
+    {% else %}             
+      {# Anonymous user #}             
+      <a href="{{ path('register') }}">Inscription</a>             
+      <a href="{{ path('login') }}">Connexion</a>             
+    {% endif %}          
+  </nav>
+
+    {% for status, messages in app.flashes('success') %}
+    <div class="alert alert-{{ status }}">
+      <ul>
+        <li>{{ messages | raw }}</li>
+      </ul>
+    </div>
+    {% endfor %}
+
+  {% block body %}{% endblock %}
+  {% block javascripts %}{% endblock %}
+
+</body>
 </html>
