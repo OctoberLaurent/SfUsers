@@ -4,6 +4,39 @@
 
 {% block body %}
 <h1>HomePage</h1>
+
+<hr>
+
+<h3>is_grantted (levels) : </h3> 
+
+<br><strong>IS_AUTHENTICATED_REMEMBERED (cookie) : </strong>
+    {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+        Yes
+    {% else %}
+        No
+    {% endif %} 
+
+
+<br><strong>IS_AUTHENTICATED_FULLY : </strong>
+    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+        Yes
+    {% else %}
+        No
+    {% endif %} 
+
+
+<br><strong>IS_AUTHENTICATED_ANONYMOUSLY : </strong>
+    {% if is_granted('IS_AUTHENTICATED_ANONYMOUSLY') %}
+        Yes
+    {% else %}
+        No
+    {% endif %}
+
+<hr>
+
+<h3>Refuser l'accès à un utilisateur dans les controllers</h3>
+
+<pre>$this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');</pre>
 {% endblock %}
 
 
